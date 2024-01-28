@@ -106,3 +106,36 @@ window.onscroll = () => {
   menuIcon.classList.remove("bx-x");
   navlist.classList.remove("open");
 };
+// parallax  ///////////////////////////////////////
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show-items");
+    } else {
+      entry.target.classList.remove("show-items");
+    }
+  });
+});
+const scrollScale = document.querySelectorAll(".scroll-scale");
+scrollScale.forEach((el) => observer.observe(el));
+
+const scrollBottom = document.querySelectorAll(".scroll-bottom");
+scrollBottom.forEach((el) => observer.observe(el));
+
+const scrollTop = document.querySelectorAll(".scroll-top");
+scrollTop.forEach((el) => observer.observe(el));
+// toggle contact  ///////////////////////////////////////
+function sendMail() {
+  var params = {
+    from_name: document.getElementById("fullName").value,
+    email_id: document.getElementById("email_id").value,
+    address: document.getElementById("address").value,
+    phone_num: document.getElementById("phone_num").value,
+    message: document.getElementById("message").value,
+  };
+  emailjs
+    .send("service_bvpwm37", "template_662f6yd", params)
+    .then(function (res) {
+      alert("Message Send successfuly " + res.status);
+    });
+}
